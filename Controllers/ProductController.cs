@@ -10,10 +10,12 @@ public class ProductController : ControllerBase
 {
 
     private readonly ApplicationDbContext _context;
+    private readonly IWebHostEnvironment _env;
 
-    public ProductController(ApplicationDbContext context)
+    public ProductController(ApplicationDbContext context, IWebHostEnvironment env)
     {
         _context = context;
+        _env = env;
     }
 
     [HttpGet("test-db")]
@@ -66,10 +68,33 @@ public class ProductController : ControllerBase
     }
 
     [HttpPost]
-    public ActionResult<Product> CreatepProduct(Product product)
+    public async Task<ActionResult<Product>> CreateProduct([FromForm] Product product, IFormFile file)
     {
         _context.products.Add(product);
-        _context.SaveChanges();
+
+        // check image
+        if (file != null)
+        {
+            // new filename
+            string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+
+            // save image
+            string uploadFolder = Path.Combine(_env.ContentRootPath, "uploads");
+            if (!Directory.Exists(uploadFolder))
+            {
+                Directory.CreateDirectory(uploadFolder);
+            }
+
+            // copy file
+            using (var fileStream = new FileStream(Path.Combine(uploadFolder, fileName), FileMode.Create))
+            {
+                await file.CopyToAsync(fileStream);
+            }
+
+            product.product_picture = fileName; // save filename
+        }
+
+        _context.SaveChanges();  // save
 
         return Ok(product);
     }

@@ -102,3 +102,4 @@ C:\Learn-2025\NetCoreWithNextJS\StoreAPI\bin\Debug\net8.0\ru\Microsoft.CodeAnaly
 C:\Learn-2025\NetCoreWithNextJS\StoreAPI\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Learn-2025\NetCoreWithNextJS\StoreAPI\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Learn-2025\NetCoreWithNextJS\StoreAPI\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Learn-2025\NetCoreWithNextJS\StoreAPI\obj\Debug\net8.0\StoreAPI.sourcelink.json
