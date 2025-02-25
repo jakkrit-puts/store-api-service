@@ -1,0 +1,48 @@
+@StoreAPI_HostAddress = http://localhost:5283
+
+// check db connect
+GET {{StoreAPI_HostAddress}}/api/Product/test-db
+Accept: application/json
+
+###
+GET {{StoreAPI_HostAddress}}/api/Product
+Accept: application/json
+
+###
+GET {{StoreAPI_HostAddress}}/api/Product/1
+Accept: application/json
+
+###
+POST {{StoreAPI_HostAddress}}/api/Product
+Accept: application/json
+Content-Type: application/json
+
+{
+  "category_id": 2,
+  "product_name": "iPad Pro 15 Pro Max",
+  "unit_price":122000,
+  "product_picture": "https://www.mxphone.com/wp-content/uploads/2021/04/41117-79579-210401-iPhone12ProMax-xl-1200x675.jpg",
+  "unit_in_stock": 112,
+  "created_date": "2021-11-22T00:00:00",
+  "modified_date": "2021-11-22T00:00:00"
+}
+
+###
+PUT {{StoreAPI_HostAddress}}/api/Product/1
+Accept: application/json
+Content-Type: application/json
+
+{
+  "id": 1,
+  "category_id": 2,
+  "product_name": "iPad Pro 17 Pro Max",
+  "unit_price":122000,
+  "product_picture": "https://www.mxphone.com/wp-content/uploads/2021/04/41117-79579-210401-iPhone12ProMax-xl-1200x675.jpg",
+  "unit_in_stock": 112,
+  "created_date": "2021-11-22T00:00:00",
+  "modified_date": "2021-11-22T00:00:00"
+}
+
+###
+DELETE  {{StoreAPI_HostAddress}}/api/Product/1
+Accept: application/json
