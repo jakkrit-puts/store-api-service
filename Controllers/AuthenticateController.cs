@@ -58,6 +58,9 @@ public class AuthenticateController : ControllerBase
         };
 
         var result = await _userManager.CreateAsync(user, model.Password);
+        await _userManager.AddToRoleAsync(user, UserRoles.User);
+
+        //Console.WriteLine(result.ToString());
 
         if (!result.Succeeded)
         {
@@ -66,7 +69,7 @@ public class AuthenticateController : ControllerBase
                 new Response
                 {
                     Status = "Error",
-                    Message = "User creation failed!. please check user details and try again."
+                    Message = result.ToString()
                 }
             );
         }
@@ -120,7 +123,8 @@ public class AuthenticateController : ControllerBase
         if (!await _roleManager.RoleExistsAsync(UserRoles.User))
             await _roleManager.CreateAsync(new IdentityRole(UserRoles.User));
 
-
+        await _userManager.AddToRoleAsync(user, UserRoles.Admin);
+        
         return Ok(new Response { Status = "Success", Message = "User created success." });
     }
 

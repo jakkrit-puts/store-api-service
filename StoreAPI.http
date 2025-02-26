@@ -1,5 +1,7 @@
 @StoreAPI_HostAddress = http://localhost:5283
 
+@Token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW4wMSIsImp0aSI6IjNjOTY4ZDM5LTFhYmQtNDIzNi1hZjJmLTNmMmIyYzE4ZTgxOSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwiZXhwIjoxNzQwNjY3ODMzLCJpc3MiOiIqIiwiYXVkIjoiKiJ9.i-YuJSDM6w_A7Txq4ETlBpeqTE6tk-Nj2gwIWyNXd1k
+
 // check db connect
 GET {{StoreAPI_HostAddress}}/api/Product/test-db
 Accept: application/json
@@ -7,10 +9,13 @@ Accept: application/json
 ###
 GET {{StoreAPI_HostAddress}}/api/Product
 Accept: application/json
+Authorization: Bearer {{Token}}
 
 ###
-GET {{StoreAPI_HostAddress}}/api/Product/1
+GET {{StoreAPI_HostAddress}}/api/Product/8
 Accept: application/json
+Authorization: Bearer {{Token}}
+
 
 ###
 POST {{StoreAPI_HostAddress}}/api/Product
@@ -46,3 +51,4 @@ Content-Type: application/json
 ###
 DELETE  {{StoreAPI_HostAddress}}/api/Product/1
 Accept: application/json
+

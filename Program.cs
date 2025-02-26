@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using StoreAPI.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -44,7 +45,41 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(option =>
+{
+  // Swagger Document
+  option.SwaggerDoc(
+    "v1", new Microsoft.OpenApi.Models.OpenApiInfo
+    {
+      Title = "Store API with .NET 8 and PosgreSQL",
+      Description = "Sample Store API"
+    }
+  );
+
+  option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+  {
+    Name = "Authorization",
+    Type = SecuritySchemeType.ApiKey,
+    Scheme = "Bearer",
+    BearerFormat = "JWT",
+    In = ParameterLocation.Header,
+    Description = "Jwt header example: \"Bearer 1234xxxxxxxx\""
+  });
+
+  // Add the bearer token
+  option.AddSecurityRequirement(new OpenApiSecurityRequirement {
+    {
+      new OpenApiSecurityScheme {
+        Reference = new OpenApiReference {
+          Type = ReferenceType.SecurityScheme,
+          Id = "Bearer"
+        }
+      },
+      new string[] {}
+    }
+  });
+
+});
 
 var app = builder.Build();
 

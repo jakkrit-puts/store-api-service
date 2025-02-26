@@ -4,7 +4,7 @@ namespace StoreAPI.Models;
 
 public class RegisterModel
 {
-    [Required(ErrorMessage = "User Name is required")]
+    [Required(ErrorMessage = "Username is required")]
     public required string Username { get; set; }
 
     [EmailAddress]

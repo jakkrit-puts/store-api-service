@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StoreAPI.Data;
 using StoreAPI.Models;
 
 namespace StoreAPI.Controllers;
 
+[Authorize] // auth all
 [ApiController]
 [Route("api/[controller]")]
 public class ProductController : ControllerBase
@@ -18,6 +20,7 @@ public class ProductController : ControllerBase
         _env = env;
     }
 
+    [AllowAnonymous]
     [HttpGet("test-db")]
     public void TestConnectDB()
     {
