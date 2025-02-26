@@ -214,6 +214,13 @@ public class AuthenticateController : ControllerBase
         return Unauthorized();
     }
 
+    // logout
+    // [HttpPost]
+    // [Route("logout")]
+    // public IActionResult Logout() {
+
+    // }
+
     // gen jwt token
     private JwtSecurityToken GetToken(List<Claim> authClaims)
     {

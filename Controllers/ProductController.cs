@@ -6,6 +6,7 @@ using StoreAPI.Models;
 namespace StoreAPI.Controllers;
 
 [Authorize] // auth all
+// [Authorize(Roles = UserRoles.Admin)] // specific role
 [ApiController]
 [Route("api/[controller]")]
 public class ProductController : ControllerBase
